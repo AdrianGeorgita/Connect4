@@ -24,6 +24,9 @@ namespace Connect4
 
         public int GetAvailableRow(int column)
         {
+            if (column < 0 || column >= Columns)
+                return -1;
+
             for (int row = Rows - 1; row >= 0; row--)
             {
                 if (!Pieces.Any(p => p.X == column && p.Y == row))

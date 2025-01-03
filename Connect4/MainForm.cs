@@ -53,9 +53,9 @@ namespace Connect4
             if (_board == null)
                 return;
 
-            int dy = 500 - 125 + 12;
             SolidBrush red = new SolidBrush(Color.FromArgb(255, 255, 0, 0));
             SolidBrush yellow = new SolidBrush(Color.FromArgb(255, 255, 255, 0));
+            SolidBrush transparentGreen = new SolidBrush(Color.FromArgb(75, 0, 255, 0));
 
             foreach (Piece p in _board.Pieces)
             {
@@ -65,8 +65,33 @@ namespace Connect4
                     brush = yellow;
                 }
                 //MessageBox.Show(p.X + " " + p.Y);
-                e.Graphics.FillEllipse(brush, 29 + p.X * 64, (p.Y + 1) * 61, 60, 60);
+                e.Graphics.FillEllipse(brush, 35 + p.X * 64, -14 + (p.Y + 1) * 64, 50, 50);
             }
+
+            if (_currentPlayer == PlayerType.Human)
+            {
+                List<Move> validMoves = GetPlayerValidMoves();
+                foreach (Move validMove in validMoves)
+                {
+                    e.Graphics.FillEllipse(transparentGreen, 35 + validMove.NewX * 64, -14 + (validMove.NewY + 1) * 64, 50, 50);
+                }
+            }
+        }
+
+        private List<Move> GetPlayerValidMoves()
+        {
+            List<Move> validMoves = new List<Move>();
+
+            for (int col = 0; col < _board.Columns; col++)
+            {
+                int availableRow = _board.GetAvailableRow(col);
+                if (availableRow != -1)
+                {
+                    validMoves.Add(new Move(-1, col, availableRow));
+                }
+            }
+
+            return validMoves;
         }
 
         private void pictureBoxBoard_MouseUp(object sender, MouseEventArgs e)
@@ -98,6 +123,9 @@ namespace Connect4
         private void ComputerMove()
         {
             Random rand = new Random();
+
+            // A se utiliza Monte Carlo in loc de alegerea aleatorie a unei coloane
+
             int randomCol = rand.Next(_board.Columns);
 
             int availableRow = _board.GetAvailableRow(randomCol);
@@ -111,6 +139,8 @@ namespace Connect4
                 _currentPlayer = PlayerType.Human;
                 pictureBoxBoard.Refresh();
             }
+            else
+                MessageBox.Show("Calculatorul a ales aleatoriu o coloana plina");
 
             CheckFinish();
         }
