@@ -100,13 +100,18 @@ namespace Connect4
                 return;
 
             int mouseX = (e.X - 29) / 64;
-            int mouseY = (e.Y - 61) / 61;
 
             int availableRow = _board.GetAvailableRow(mouseX);
 
-            if (availableRow != -1)
-            {
+            if (availableRow == -1)
+                return;
 
+            int validCellX = 29 + mouseX * 64;
+            int validCellY = (availableRow + 1) * 61;
+            Rectangle validCellBounds = new Rectangle(validCellX, validCellY, 60, 60);
+
+            if (validCellBounds.Contains(e.Location))
+            {
                 Piece newPiece = new Piece(mouseX, availableRow, _board.Pieces.Count, PlayerType.Human);
                 _board.Pieces.Add(newPiece);
                 pictureBoxBoard.Refresh();
