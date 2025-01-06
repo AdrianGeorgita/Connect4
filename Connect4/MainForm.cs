@@ -13,10 +13,14 @@ namespace Connect4
 {
     public partial class MainForm : Form
     {
+        private const int MCTS_iterations = 2500;
+
         private Board _board;
         private int _selected; // indexul piesei selectate
         private PlayerType _currentPlayer; // om sau calculator
         private Bitmap _boardImage;
+
+        private MCTS mcts;
 
         public MainForm()
         {
@@ -118,6 +122,8 @@ namespace Connect4
 
                 _currentPlayer = PlayerType.Computer;
 
+                mcts.OponentMove(mouseX);
+
                 CheckFinish();
 
                 if (_currentPlayer == PlayerType.Computer)
@@ -127,25 +133,25 @@ namespace Connect4
 
         private void ComputerMove()
         {
-            Random rand = new Random();
+            int col = mcts.Run(MCTS_iterations);
 
-            // A se utiliza Monte Carlo in loc de alegerea aleatorie a unei coloane
+            int row = _board.GetAvailableRow(col);
 
-            int randomCol = rand.Next(_board.Columns);
-
-            int availableRow = _board.GetAvailableRow(randomCol);
-
-            if (availableRow != -1)
+            if (row != -1) 
             {
-                Move move = new Move(-1, randomCol, availableRow);
+                Move move = new Move(-1, col, row);
                 _board = _board.MakeMove(move);
                 pictureBoxBoard.Refresh();
 
                 _currentPlayer = PlayerType.Human;
                 pictureBoxBoard.Refresh();
             }
-            else
-                MessageBox.Show("Calculatorul a ales aleatoriu o coloana plina");
+            else 
+            {
+                MessageBox.Show("Remiza");
+                _currentPlayer = PlayerType.None;
+            }
+
 
             CheckFinish();
         }
@@ -174,6 +180,9 @@ namespace Connect4
         {
             _board = new Board();
             _currentPlayer = PlayerType.Computer;
+
+            mcts = new MCTS(_board);
+
             ComputerMove();
         }
 
