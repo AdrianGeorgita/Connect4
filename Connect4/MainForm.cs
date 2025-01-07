@@ -13,7 +13,7 @@ namespace Connect4
 {
     public partial class MainForm : Form
     {
-        private const int MCTS_iterations = 2500;
+        private const int MCTS_iterations = 100;
 
         private Board _board;
         private int _selected; // indexul piesei selectate
@@ -122,7 +122,7 @@ namespace Connect4
 
                 _currentPlayer = PlayerType.Computer;
 
-                mcts.OponentMove(mouseX);
+                mcts.OpponentMove(mouseX);
 
                 CheckFinish();
 
