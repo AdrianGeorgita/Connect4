@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Connect4 {
     internal class MCTS {
@@ -16,6 +17,10 @@ namespace Connect4 {
         }
 
         public int Run(int iterations) {
+            if (iterations < 1) {
+                throw new ArgumentException();
+            }
+
             for (int i = 0; i < iterations; i++) {
                 Node node = Select();
                 Node newNode = Expand(node);
@@ -31,14 +36,19 @@ namespace Connect4 {
             return root.column;
         }
 
-        public void OponentMove(int column) {
+        public void OpponentMove(int column) {
             foreach (Node child in root.children) {
                 if (child.column == column) {
                     root = child;
                     root.parent = null;
-                    break;
+                    return;
                 }
             }
+
+            Board newBoard = new Board(root.board);
+            newBoard.Pieces.Add(new Piece(column, root.board.GetAvailableRow(column), root.board.Pieces.Count, PlayerType.Human));
+
+            root = new Node(null, newBoard, column, PlayerType.Human);
         }
 
         private double UTC(Node node) {
