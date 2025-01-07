@@ -35,6 +35,7 @@
             this.ajutorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.despreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBoxBoard = new System.Windows.Forms.PictureBox();
+            this.dificultateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBoard)).BeginInit();
             this.SuspendLayout();
@@ -55,23 +56,24 @@
             // 
             this.jocToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.jocNouToolStripMenuItem,
+            this.dificultateToolStripMenuItem,
             this.iesireToolStripMenuItem});
             this.jocToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText;
             this.jocToolStripMenuItem.Name = "jocToolStripMenuItem";
-            this.jocToolStripMenuItem.Size = new System.Drawing.Size(42, 24);
+            this.jocToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
             this.jocToolStripMenuItem.Text = "&Joc";
             // 
             // jocNouToolStripMenuItem
             // 
             this.jocNouToolStripMenuItem.Name = "jocNouToolStripMenuItem";
-            this.jocNouToolStripMenuItem.Size = new System.Drawing.Size(134, 26);
+            this.jocNouToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.jocNouToolStripMenuItem.Text = "Joc &nou";
             this.jocNouToolStripMenuItem.Click += new System.EventHandler(this.jocNouToolStripMenuItem_Click);
             // 
             // iesireToolStripMenuItem
             // 
             this.iesireToolStripMenuItem.Name = "iesireToolStripMenuItem";
-            this.iesireToolStripMenuItem.Size = new System.Drawing.Size(134, 26);
+            this.iesireToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.iesireToolStripMenuItem.Text = "&Iesire";
             this.iesireToolStripMenuItem.Click += new System.EventHandler(this.iesireToolStripMenuItem_Click);
             // 
@@ -81,13 +83,13 @@
             this.despreToolStripMenuItem});
             this.ajutorToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText;
             this.ajutorToolStripMenuItem.Name = "ajutorToolStripMenuItem";
-            this.ajutorToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
+            this.ajutorToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
             this.ajutorToolStripMenuItem.Text = "&Ajutor";
             // 
             // despreToolStripMenuItem
             // 
             this.despreToolStripMenuItem.Name = "despreToolStripMenuItem";
-            this.despreToolStripMenuItem.Size = new System.Drawing.Size(140, 26);
+            this.despreToolStripMenuItem.Size = new System.Drawing.Size(148, 26);
             this.despreToolStripMenuItem.Text = "&Despre...";
             this.despreToolStripMenuItem.Click += new System.EventHandler(this.despreToolStripMenuItem_Click);
             // 
@@ -100,6 +102,13 @@
             this.pictureBoxBoard.TabStop = false;
             this.pictureBoxBoard.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxBoard_Paint);
             this.pictureBoxBoard.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxBoard_MouseUp);
+            // 
+            // dificultateToolStripMenuItem
+            // 
+            this.dificultateToolStripMenuItem.Name = "dificultateToolStripMenuItem";
+            this.dificultateToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.dificultateToolStripMenuItem.Text = "Dificultate";
+            this.dificultateToolStripMenuItem.Click += new System.EventHandler(this.dificultateToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -131,6 +140,7 @@
         private System.Windows.Forms.PictureBox pictureBoxBoard;
         private System.Windows.Forms.ToolStripMenuItem ajutorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem despreToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dificultateToolStripMenuItem;
     }
 }
 

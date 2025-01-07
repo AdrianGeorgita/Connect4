@@ -13,7 +13,7 @@ namespace Connect4
 {
     public partial class MainForm : Form
     {
-        private const int MCTS_iterations = 100;
+        private int MCTS_iterations = 100;
 
         private Board _board;
         private int _selected; // indexul piesei selectate
@@ -197,6 +197,15 @@ namespace Connect4
         private void iesireToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void dificultateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DifficultyForm difficultyForm = new DifficultyForm(MCTS_iterations);
+            if (difficultyForm.ShowDialog() == DialogResult.OK)
+            {
+                MCTS_iterations = Convert.ToInt32(difficultyForm.Tag);
+            }
         }
     }
 }
