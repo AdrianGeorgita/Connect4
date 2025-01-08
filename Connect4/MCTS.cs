@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml.Linq;
 
 namespace Connect4 {
@@ -114,18 +116,16 @@ namespace Connect4 {
 
                 player = (player == PlayerType.Computer) ? PlayerType.Human : PlayerType.Computer;
 
-                int a;
-                for (a = 0; a < board.Columns; a++) {
-                    if (board.GetAvailableRow(a) != -1) {
-                        break;
+                List<(int col, int row)> moves = new List<(int col, int row)>();
+
+                for (int c = 0; c < board.Columns; c++) {
+                    int r = board.GetAvailableRow(c);
+                    if (r != -1) {
+                        moves.Add((c, r));
                     }
                 }
 
-                int col = -1, row = -1;
-                while (row == -1) {
-                    col = rand.Next(board.Columns);
-                    row = board.GetAvailableRow(col);
-                }
+                (int col, int row) = moves[rand.Next(moves.Count)];
 
                 board.Pieces.Add(new Piece(col, row, board.Pieces.Count, player));
             }
