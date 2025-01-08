@@ -146,12 +146,6 @@ namespace Connect4
                 _currentPlayer = PlayerType.Human;
                 pictureBoxBoard.Refresh();
             }
-            else 
-            {
-                MessageBox.Show("Remiza");
-                _currentPlayer = PlayerType.None;
-            }
-
 
             CheckFinish();
         }
@@ -171,6 +165,11 @@ namespace Connect4
                 else if (winner == PlayerType.Human)
                 {
                     MessageBox.Show("Ai castigat!");
+                    _currentPlayer = PlayerType.None;
+                } 
+                else if (winner == PlayerType.None) 
+                {
+                    MessageBox.Show("Remiza");
                     _currentPlayer = PlayerType.None;
                 }
             }

@@ -82,7 +82,7 @@ namespace Connect4
                 }
             }
 
-            finished = false;
+            finished = Pieces.Count == Rows * Columns;
             winner = PlayerType.None;
         }
 

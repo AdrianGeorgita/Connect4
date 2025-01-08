@@ -96,12 +96,22 @@ namespace Connect4 {
 
         private double Simulate(Node node) {
             Board board = new Board(node.board);
-
-            bool finished = false;
-            PlayerType winner = PlayerType.None;
             PlayerType player = node.player;
 
-            do {
+            while (true) {
+                board.CheckFinish(out bool finished, out PlayerType winner);
+
+                if (finished) {
+                    switch (winner) {
+                        case PlayerType.Computer:
+                            return 1.0;
+                        case PlayerType.None:
+                            return 0.5;
+                        case PlayerType.Human:
+                            return 0.0;
+                    }
+                }
+
                 player = (player == PlayerType.Computer) ? PlayerType.Human : PlayerType.Computer;
 
                 int a;
@@ -111,28 +121,14 @@ namespace Connect4 {
                     }
                 }
 
-                if (a == board.Columns) {
-                    return 0.5;
-                }
-
-                int col = -1;
-                int row = -1;
-
+                int col = -1, row = -1;
                 while (row == -1) {
                     col = rand.Next(board.Columns);
                     row = board.GetAvailableRow(col);
                 }
 
                 board.Pieces.Add(new Piece(col, row, board.Pieces.Count, player));
-
-                board.CheckFinish(out finished, out winner);
-            } while (!finished);
-
-            if (winner == PlayerType.Computer) {
-                return 1;
             }
-
-            return 0;
         }
 
         private void Backpropagate(Node node, double result) {
