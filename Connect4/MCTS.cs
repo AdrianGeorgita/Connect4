@@ -1,26 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
+[assembly: InternalsVisibleTo("UnitTestMCTS")]
+
 namespace Connect4 {
+
+    /* Algoritmul utilizează o cpie a tablei de joc trimisă ca parametru în constructor
+     * 
+     * Mutările jucătorului sunt transmise prin metoda OpponentMove
+     * Mutările jucătorului sunt realizate pe tabla de joc a algoritmului
+     * 
+     * Murătile calculatorului sunt returnate de metoda run
+     * Mutările calculatorului ar trebui realizate pe tabla de joc a jucătorului
+     * 
+     */
+
     internal class MCTS {
         private readonly double C = Math.Sqrt(2);
-        Random rand = new Random();
+        readonly Random rand = new Random();
 
         private Node root;
 
         public MCTS(Board board) {
+            if (board == null) {
+                throw new ArgumentNullException("board");
+            }
+
             root = new Node(null, board, -1, PlayerType.Human);
         }
 
         public int Run(int iterations) {
             if (iterations < 1) {
-                throw new ArgumentException();
+                throw new ArgumentException("iterations < 1", "iterations");
+            }
+
+            if (root.player != PlayerType.Human) {
+                throw new SystemException("wrong player turn");
             }
 
             for (int i = 0; i < iterations; i++) {
@@ -39,6 +61,14 @@ namespace Connect4 {
         }
 
         public void OpponentMove(int column) {
+            if (column < 0 || column >= root.board.Columns) {
+                throw new ArgumentException($"column must be in betwen 0 and {root.board.Columns - 1}", "column");
+            }
+
+            if (root.player != PlayerType.Computer) {
+                throw new SystemException("wrong player turn");
+            }
+
             foreach (Node child in root.children) {
                 if (child.column == column) {
                     root = child;
@@ -47,8 +77,13 @@ namespace Connect4 {
                 }
             }
 
+            int row = root.board.GetAvailableRow(column);
+            if (row == -1) {
+                throw new SystemException("invalid move");
+            }
+
             Board newBoard = new Board(root.board);
-            newBoard.Pieces.Add(new Piece(column, root.board.GetAvailableRow(column), root.board.Pieces.Count, PlayerType.Human));
+            newBoard.Pieces.Add(new Piece(column, row, root.board.Pieces.Count, PlayerType.Human));
 
             root = new Node(null, newBoard, column, PlayerType.Human);
         }
