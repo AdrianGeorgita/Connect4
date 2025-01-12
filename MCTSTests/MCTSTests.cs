@@ -179,6 +179,8 @@ namespace Connect4 {
             }
         }
 
+        /* Verificarea algoritmului pentru o tablă de joc cu număr maxim de piese existente */
+
         [TestMethod]
         public void CheckForFullBoard() {
             Board board = new Board();
@@ -187,7 +189,7 @@ namespace Connect4 {
                 return (p == PlayerType.Computer) ? PlayerType.Human : PlayerType.Computer;
             }
 
-            // Creating a board with mac pieces
+            // Creating a board with max pieces
             PlayerType player = PlayerType.Computer;
             for (int i = 0; i < board.Rows; i++) {
                 for (int j = 0; j < board.Columns; j++) {
