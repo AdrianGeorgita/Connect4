@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
-[assembly: InternalsVisibleTo("UnitTestMCTS")]
+[assembly: InternalsVisibleTo("MCTSTests")]
 
 namespace Connect4 {
 

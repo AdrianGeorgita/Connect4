@@ -8,8 +8,8 @@
     <ProjectGuid>{8B8B2192-2D06-40FD-9D9C-2591E21080A1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UnitTestMCTS</RootNamespace>
-    <AssemblyName>UnitTestMCTS</AssemblyName>
+    <RootNamespace>MCTSTests</RootNamespace>
+    <AssemblyName>MCTSTests</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -49,7 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTestMCTS.cs" />
+    <Compile Include="MCTSTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

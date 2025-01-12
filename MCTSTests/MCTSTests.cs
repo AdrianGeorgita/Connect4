@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Connect4 {
     [TestClass]
-    public class UnitTestMCTS {
+    public class MCTSTests {
 
         /* Verificare parametri pentru contructorul clasei MCTS */
 
