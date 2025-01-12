@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connect4", "Connect4\Connec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connect4Tests", "Connect4Tests\Connect4Tests.csproj", "{F200646F-F6FD-46E6-807E-3FB9FE1204E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCTSTests", "UnitTestProject1\MCTSTests.csproj", "{8B8B2192-2D06-40FD-9D9C-2591E21080A1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCTSTests", "MCTSTests\MCTSTests.csproj", "{8B8B2192-2D06-40FD-9D9C-2591E21080A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
