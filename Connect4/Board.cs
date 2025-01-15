@@ -22,6 +22,11 @@ namespace Connect4
             Pieces = new List<Piece>();
         }
 
+        /// <summary>
+        /// Determina pentru o coloana data, primul rand pe care se poate plasa piesa (de jos in sus)
+        /// </summary>
+        /// <param name="column">Coloana pentru care se cauta un rand liber</param>
+        /// <returns>Un numar reprezentand primul rand disponibil</returns>
         public int GetAvailableRow(int column)
         {
             if (column < 0 || column >= Columns)
@@ -95,6 +100,15 @@ namespace Connect4
                    CheckDirection(player, startX, startY, 1, -1);
         }
 
+        /// <summary>
+        /// Verifica pe o anumita directie daca exista 4 piese vecine plasate de catre acelasi tip de jucator 
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="startX"></param>
+        /// <param name="startY"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <returns>True, daca exista 4 piese vecine si False in caz contrar</returns>
         private bool CheckDirection(PlayerType player, int startX, int startY, int dx, int dy)
         {
             int count = 0;

@@ -16,7 +16,6 @@ namespace Connect4
         private int MCTS_iterations = 100;
 
         private Board _board;
-        private int _selected; // indexul piesei selectate
         private PlayerType _currentPlayer; // om sau calculator
         private Bitmap _boardImage;
 
@@ -41,7 +40,6 @@ namespace Connect4
 
             _board = new Board();
             _currentPlayer = PlayerType.None;
-            _selected = -1; // nicio piesa selectata
 
             this.ClientSize = new System.Drawing.Size(850, 600);
             this.pictureBoxBoard.Size = new System.Drawing.Size(500, 500);
@@ -72,6 +70,7 @@ namespace Connect4
                 e.Graphics.FillEllipse(brush, 35 + p.X * 64, -14 + (p.Y + 1) * 64, 50, 50);
             }
 
+            // Deseneaza pozitiile posibile pe care poate plasa jucatorul piese
             if (_currentPlayer == PlayerType.Human)
             {
                 List<Move> validMoves = GetPlayerValidMoves();
@@ -82,6 +81,10 @@ namespace Connect4
             }
         }
 
+        /// <summary>
+        /// Obtine toate pozitiile pe care poate plasa jucatorul o piesa
+        /// </summary>
+        /// <returns></returns>
         private List<Move> GetPlayerValidMoves()
         {
             List<Move> validMoves = new List<Move>();
@@ -131,6 +134,9 @@ namespace Connect4
             }
         }
 
+        /// <summary>
+        /// Realizeaza o mutare de catre Calculator
+        /// </summary>
         private void ComputerMove()
         {
             int col = mcts.Run(MCTS_iterations);
