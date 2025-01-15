@@ -1,9 +1,4 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Connect4 {
     internal class Node {
@@ -21,11 +16,18 @@ namespace Connect4 {
 
         public int column;
 
+        /// <summary>
+        /// Constructor pentru un nod din arbore
+        /// </summary>
+        /// <param name="parent">Nodul părinte</param>
+        /// <param name="board">Tabla de joc a nodului</param>
+        /// <param name="column">Mutarea prin care se ajunge din părinte în nod</param>
+        /// <param name="player">Jucătorul care a realizat mutarea</param>
         public Node(Node parent, Board board, int column, PlayerType player) {
             this.column = column;
             this.parent = parent;
             this.board = board;
-            this.board.CheckFinish(out bool finished, out PlayerType winner);
+            this.board.CheckFinish(out finished, out winner);
             this.player = player;
         }
     }
